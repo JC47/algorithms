@@ -36,7 +36,7 @@ function getRandomInt(min, max) {
 }
 
 for(let i = 0; i < n; i++){
-    arr.push(getRandomInt(0,100));
+    arr.push(getRandomInt(1,100));
 }
 
 let data = JSON.stringify(arr);
