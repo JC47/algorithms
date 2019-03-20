@@ -1,0 +1,19 @@
+100
+burbuja 0.84 
+merge 0.71
+
+1000
+burbuja 0.82
+merge 0.86
+
+10000
+burbuja 0.457
+merge 0.99
+
+100000
+burbuja 40.331s
+merge 0.260s
+
+1000000
+burbuja 52 min 
+merge 1.880s
