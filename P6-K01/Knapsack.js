@@ -35,7 +35,7 @@ module.exports = class Knapsack {
 
     solve() {
         // Antes que nada hay que ordenar por valor y peso
-        this.sortValue();
+        // this.sortValue();
         this.sortWeight();
 
         this.selectedItems = [];
