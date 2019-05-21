@@ -1,11 +1,12 @@
 const MergeSort = require('./merge-sort/MergeSort');
 
 module.exports = class Knapsack {
-    
+
     constructor(possibleItems, weightLimit) {
         this.selectedItems = [];
         this.weightLimit = weightLimit;
         this.possibleItems = possibleItems;
+        this.wLimit = weightLimit > 1000;
     }
 
     sortWeight() {
@@ -42,10 +43,10 @@ module.exports = class Knapsack {
         // Matriz
         const numberOfRows = this.possibleItems.length;
         const numberOfColumns = this.weightLimit;
-        /* const kMatriz = Array(numberOfRows).fill(null).map(() => {
+        const kMatriz = Array(numberOfRows).fill(null).map(() => {
             return Array(numberOfColumns + 1).fill(null);
-        }); */
-        const kMatriz = Array(numberOfRows).fill(Array(numberOfColumns + 1));
+        });
+        // const kMatriz = Array(numberOfRows).fill(Array(numberOfColumns + 1));
 
         // Se llena la primer columna con ceros (Peso máximo 0)
         for (let itemIndex = 0; itemIndex < this.possibleItems.length; itemIndex++) {
@@ -89,7 +90,8 @@ module.exports = class Knapsack {
 
             if (kMatriz[itemIndex][weightIndex] && kMatriz[itemIndex][weightIndex] === kMatriz[itemIndex - 1][weightIndex]) {
                 const prevSumValue = kMatriz[itemIndex - 1][weightIndex];
-                const prevPrevSumValue = kMatriz[itemIndex - 2][weightIndex];
+                const prevPrevSumValue = (itemIndex - 2) < 0 ? kMatriz[itemIndex - 1][weightIndex] : kMatriz[itemIndex - 2][weightIndex];
+                // const prevPrevSumValue = kMatriz[itemIndex - 2][weightIndex];
                 if (!prevSumValue || (prevSumValue && prevPrevSumValue !== prevSumValue)) {
                     this.selectedItems.push(prevItem);
                 }

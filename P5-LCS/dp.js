@@ -70,16 +70,16 @@ function lcs(cadena1, cadena2) {
         if (cadena1[columnIndex - 1] === cadena2[rowIndex - 1]) {
             // Diagonal
             result.unshift(cadena1[columnIndex - 1]);
-            columnIndex -= 1;
-            rowIndex -= 1;
+            columnIndex--;
+            rowIndex--;
             if (columnIndex < 0 || rowIndex < 0) break; 
         } else if (lcsMatriz[rowIndex][columnIndex] === lcsMatriz[rowIndex][columnIndex - 1]) {
             // MIzquierda
-            columnIndex -= 1;
+            columnIndex--;
             if (columnIndex < 0) break; 
         } else {
             // Move up.
-            rowIndex -= 1;
+            rowIndex--;
             if (rowIndex < 0) break; 
         }
     }

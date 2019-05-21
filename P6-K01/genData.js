@@ -13,7 +13,7 @@ function getRandomInt(min, max) {
 }
 
 for (let i = 0; i < n; i++) {
-    n1.push({ value: getRandomInt(1, 100), weight: getRandomInt(1, 10) });
+    n1.push({ value: getRandomInt(1, 100), weight: getRandomInt(1, 100) });
 }
 
 let data = JSON.stringify(n1);
