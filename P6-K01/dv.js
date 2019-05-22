@@ -1,53 +1,41 @@
-const MergeSort = require('./merge-sort/MergeSort');
 let items = require('./data.json');
 
-const maxWeight = 1000;
-let acumalated = maxWeight;
+let sol = [];
 
-function solve (itms) {
-    let result = [];
-
-    for (let i = 0; i < itms.length; i++) {
-        if (itms[i].weight <= acumalated) {
-            result.push(itms[i]);
-            acumalated -= itms[i].weight;
-            if (acumalated <= 0) {
-                result.concat(solve(itms.slice(i + 1)));
-            }
-        }
-        /* else if (itms[i].weight <= maxWeight) {
-            if (validate(result,itms[i])){
-
-            }
-        } */
+function solve (itms, max, idx) {
+    if (max == 0 || idx == itms.length) {
+        return 0;
     }
-
-    return result;
+    if (itms[idx].weight > max)
+        return solve(itms, max, idx + 1);
+    
+    let rMax = itms[idx].value + solve(itms, max - itms[idx].weight, idx + 1);
+    let lMax = solve(itms, max, idx + 1);
+    buildSol(idx);
+    if (rMax > lMax) {
+        return rMax;
+    }
+    else {
+        return lMax;
+    }
 }
 
-
-function validate (arrR, arrI) {
-
+function buildSol (n) {
+    let i = sol.indexOf(n);
+    if (i < 0) {
+        sol.push(n);   
+    }
+    else {
+        sol.splice(i,1);
+    }
 }
 
-items = new MergeSort({
-    compareCallback: (itemA, itemB) => {
-        if (itemA.weight === itemB.weight) {
-            return 0;
-        }
+/* let x = [{ "value": 5, "weight": 4 },
+    { "value": 1, "weight": 1 },
+    { "value": 7, "weight": 5 },
+    { "value": 4, "weight": 3 }]; */
 
-        return itemA.weight < itemB.weight ? -1 : 1;
-    },
-}).sort(items);
-
-items = new MergeSort({
-    compareCallback: (itemA, itemB) => {
-        if (itemA.value === itemB.value) {
-            return 0;
-        }
-
-        return itemA.value > itemB.value ? -1 : 1;
-    },
-}).sort(items);
-
-console.log(solve(items));
+solve(items,10,0);
+for (let i of sol) {
+    console.log(items[i]);
+}

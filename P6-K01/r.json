@@ -40,3 +40,10 @@
         "weight": 8
     }
 ]
+
+/* [
+    { "value": 5, "weight": 4 },
+    { "value": 1, "weight": 1 },
+    { "value": 7, "weight": 5 },
+    { "value": 4, "weight": 3 }
+] */
