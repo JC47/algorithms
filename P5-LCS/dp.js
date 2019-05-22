@@ -74,11 +74,11 @@ function lcs(cadena1, cadena2) {
             rowIndex--;
             if (columnIndex < 0 || rowIndex < 0) break; 
         } else if (lcsMatriz[rowIndex][columnIndex] === lcsMatriz[rowIndex][columnIndex - 1]) {
-            // MIzquierda
+            // Mueve izquierda
             columnIndex--;
             if (columnIndex < 0) break; 
         } else {
-            // Move up.
+            // Mueve arriba
             rowIndex--;
             if (rowIndex < 0) break; 
         }

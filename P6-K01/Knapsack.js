@@ -6,7 +6,6 @@ module.exports = class Knapsack {
         this.selectedItems = [];
         this.weightLimit = weightLimit;
         this.possibleItems = possibleItems;
-        this.wLimit = weightLimit > 1000;
     }
 
     sortWeight() {
@@ -93,10 +92,14 @@ module.exports = class Knapsack {
                 const prevPrevSumValue = (itemIndex - 2) < 0 ? kMatriz[itemIndex - 1][weightIndex] : kMatriz[itemIndex - 2][weightIndex];
                 // const prevPrevSumValue = kMatriz[itemIndex - 2][weightIndex];
                 if (!prevSumValue || (prevSumValue && prevPrevSumValue !== prevSumValue)) {
-                    this.selectedItems.push(prevItem);
+                    if (this.totalWeight <= this.weightLimit) {
+                        this.selectedItems.push(prevItem);
+                    }
                 }
             } else if (kMatriz[itemIndex - 1][weightIndex - currentItem.weight]) {
-                this.selectedItems.push(prevItem);
+                if (this.totalWeight <= this.weightLimit) {
+                    this.selectedItems.push(prevItem);
+                }
                 weightIndex -= currentItem.weight;
             }
 

@@ -35,6 +35,4 @@ let cadenas = require('./data.json');
 let c1 = cadenas.c1;
 let c2 = cadenas.c2;
 
-// ['A','G', 'G', 'T', 'A', 'B'], ['G', 'X', 'T', 'X', 'A', 'Y', 'B']
-
 console.log(maxlcs(c1,c2));
