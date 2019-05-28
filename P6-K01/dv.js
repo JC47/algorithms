@@ -1,33 +1,30 @@
+const MergeSort = require('./merge-sort/MergeSort');
 let items = require('./data.json');
 
 let sol = [];
 
-function solve (itms, max, idx) {
-    if (max == 0 || idx == itms.length) {
-        return 0;
-    }
-    if (itms[idx].weight > max)
-        return solve(itms, max, idx + 1);
-    
-    let rMax = itms[idx].value + solve(itms, max - itms[idx].weight, idx + 1);
-    let lMax = solve(itms, max, idx + 1);
-    buildSol(idx);
-    if (rMax > lMax) {
-        return rMax;
-    }
-    else {
-        return lMax;
-    }
-}
+items = new MergeSort({
+    compareCallback: (itemA, itemB) => {
+        if (itemA.weight === itemB.weight) {
+            return 0;
+        }
 
-function buildSol (n) {
-    let i = sol.indexOf(n);
-    if (i < 0) {
-        sol.push(n);   
+        return itemA.weight < itemB.weight ? -1 : 1;
+    },
+}).sort(items);
+
+
+function solve (max) {
+    let acumulator = max;
+    let mv = 0;
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].weight < acumulator) {
+            sol.push(items[i]);
+            acumulator -= items[i].weight;
+            mv += items[i].value;
+        }
     }
-    else {
-        sol.splice(i,1);
-    }
+    return mv;
 }
 
 /* let x = [{ "value": 5, "weight": 4 },
@@ -35,7 +32,7 @@ function buildSol (n) {
     { "value": 7, "weight": 5 },
     { "value": 4, "weight": 3 }]; */
 
-solve(items,10,0);
+console.log(solve(100));
 for (let i of sol) {
-    console.log(items[i]);
+    console.log(i);
 }
